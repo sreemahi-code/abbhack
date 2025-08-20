@@ -1,1 +1,0 @@
-- To run code: uvicorn main:app --port 8020
