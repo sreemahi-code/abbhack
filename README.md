@@ -1,4 +1,4 @@
-#IntelliInspect
+# IntelliInspect
 A machine learning-based inspection simulation tool built with Angular 18 (frontend), .NET 8 (backend API), and Python 3.13 + FastAPI (ML service). It processes CSV datasets, trains models for prediction, and simulates inspections via streaming.
 Setup and Deployment Instructions (Docker-based)
 
@@ -28,7 +28,7 @@ Access the Application:
 
 Frontend: Open http://localhost:4200 in your browser.
 
-##Usage Guide
+## Usage Guide
 Usage Guide
 
 Upload Dataset (Screen 1):
@@ -56,7 +56,7 @@ On completion, see "Simulation completed" message and option to Restart.
 
 
 
-###Notes:
+### Notes:
 
 Use a small CSV subset (~30-50k rows) for quick training/demo.
 Errors are handled with toasts; ensure CORS is enabled for dev.
