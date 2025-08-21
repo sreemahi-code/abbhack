@@ -1,11 +1,7 @@
-abbhack
+## Run locally (dev/demo)
 
-This project is containerized with **Docker** for easy setup.
-
-🚀 Running with Docker
-
-### 1. Build the Docker image
-```bash
-docker build -t abbhack .
-
-
+1. Ensure Docker is available in your environment (Docker Desktop WSL integration or Docker Engine in WSL)
+2. Create `data` folder and drop dataset:
+   ```bash
+   mkdir -p data
+   # add a small sample: data/current.csv
