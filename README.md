@@ -5,7 +5,7 @@ Setup and Deployment Instructions (Docker-based)
 Prerequisites:
 
 Docker and Docker Compose installed.
-Download the sample dataset (e.g., from Kaggle Bosch dataset) and place a subset CSV in a convenient location for upload during usage.
+Download the sample dataset https://www.kaggle.com/c/bosch-production-line-performance/data and place a subset CSV in a convenient location for upload during usage.
 
 Clone the Repository:
 textgit clone <repo-url>
@@ -15,7 +15,7 @@ Build and Run with Docker Compose:
 
 Ensure the docker-compose.yml file is in the root directory.
 Run the following command to build and start all services:
-textdocker-compose up --build
+docker-compose up --build
 
 This will:
 
@@ -32,4 +32,4 @@ ML Service: http://localhost:8000 (for direct ML endpoint testing, if needed).
 
 
 Stopping the Services:
-textdocker-compose down
+docker-compose down
