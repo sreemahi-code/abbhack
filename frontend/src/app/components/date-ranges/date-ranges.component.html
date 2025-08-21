@@ -1,0 +1,167 @@
+<div class="date-ranges-container">
+  <h2 class="page-title">Date Range Selection</h2>
+
+  <!-- Three Period Cards -->
+  <div class="period-cards-grid">
+    <!-- Training Period Card -->
+    <div class="period-card">
+      <div class="card-header">
+        <mat-icon class="period-icon training-icon">calendar_today</mat-icon>
+        <span class="period-title">Training Period</span>
+      </div>
+      <div class="date-inputs">
+        <div class="date-field">
+          <label>Start Date:</label>
+          <mat-form-field appearance="outline">
+            <input matInput [matDatepicker]="trainingStartPicker" 
+                   [(ngModel)]="trainingPeriod.startDate" 
+                   placeholder="01/01/2021" readonly>
+            <mat-datepicker-toggle matSuffix [for]="trainingStartPicker"></mat-datepicker-toggle>
+            <mat-datepicker #trainingStartPicker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="date-field">
+          <label>End Date:</label>
+          <mat-form-field appearance="outline">
+            <input matInput [matDatepicker]="trainingEndPicker" 
+                   [(ngModel)]="trainingPeriod.endDate" 
+                   placeholder="08/31/2021" readonly>
+            <mat-datepicker-toggle matSuffix [for]="trainingEndPicker"></mat-datepicker-toggle>
+            <mat-datepicker #trainingEndPicker></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <!-- Testing Period Card -->
+    <div class="period-card">
+      <div class="card-header">
+        <mat-icon class="period-icon testing-icon">calendar_today</mat-icon>
+        <span class="period-title">Testing Period</span>
+      </div>
+      <div class="date-inputs">
+        <div class="date-field">
+          <label>Start Date:</label>
+          <mat-form-field appearance="outline">
+            <input matInput [matDatepicker]="testingStartPicker" 
+                   [(ngModel)]="testingPeriod.startDate" 
+                   placeholder="09/01/2021" readonly>
+            <mat-datepicker-toggle matSuffix [for]="testingStartPicker"></mat-datepicker-toggle>
+            <mat-datepicker #testingStartPicker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="date-field">
+          <label>End Date:</label>
+          <mat-form-field appearance="outline">
+            <input matInput [matDatepicker]="testingEndPicker" 
+                   [(ngModel)]="testingPeriod.endDate" 
+                   placeholder="10/31/2021" readonly>
+            <mat-datepicker-toggle matSuffix [for]="testingEndPicker"></mat-datepicker-toggle>
+            <mat-datepicker #testingEndPicker></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <!-- Simulation Period Card -->
+    <div class="period-card">
+      <div class="card-header">
+        <mat-icon class="period-icon simulation-icon">calendar_today</mat-icon>
+        <span class="period-title">Simulation Period</span>
+      </div>
+      <div class="date-inputs">
+        <div class="date-field">
+          <label>Start Date:</label>
+          <mat-form-field appearance="outline">
+            <input matInput [matDatepicker]="simulationStartPicker" 
+                   [(ngModel)]="simulationPeriod.startDate" 
+                   placeholder="11/01/2021" readonly>
+            <mat-datepicker-toggle matSuffix [for]="simulationStartPicker"></mat-datepicker-toggle>
+            <mat-datepicker #simulationStartPicker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="date-field">
+          <label>End Date:</label>
+          <mat-form-field appearance="outline">
+            <input matInput [matDatepicker]="simulationEndPicker" 
+                   [(ngModel)]="simulationPeriod.endDate" 
+                   placeholder="12/31/2021" readonly>
+            <mat-datepicker-toggle matSuffix [for]="simulationEndPicker"></mat-datepicker-toggle>
+            <mat-datepicker #simulationEndPicker></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Validation Message -->
+  <div *ngIf="isValidated" class="validation-message success">
+    <mat-icon class="validation-icon">check_circle</mat-icon>
+    <span>Date ranges validated successfully!</span>
+  </div>
+
+  <!-- Range Summary Cards -->
+  <div *ngIf="isValidated" class="summary-cards">
+    <div class="summary-card training-summary">
+      <mat-icon class="summary-icon">schedule</mat-icon>
+      <span class="summary-label">Training Period</span>
+      <div class="summary-value">{{ trainingDays }} days</div>
+      <div class="summary-range">{{ trainingRangeText }}</div>
+    </div>
+
+    <div class="summary-card testing-summary">
+      <mat-icon class="summary-icon">schedule</mat-icon>
+      <span class="summary-label">Testing Period</span>
+      <div class="summary-value">{{ testingDays }} days</div>
+      <div class="summary-range">{{ testingRangeText }}</div>
+    </div>
+
+    <div class="summary-card simulation-summary">
+      <mat-icon class="summary-icon">schedule</mat-icon>
+      <span class="summary-label">Simulation Period</span>
+      <div class="summary-value">{{ simulationDays }} days</div>
+      <div class="summary-range">{{ simulationRangeText }}</div>
+    </div>
+  </div>
+
+  <!-- Timeline Bar Chart -->
+  <div *ngIf="isValidated" class="chart-container">
+    <div class="chart-header">
+      <mat-icon class="chart-icon">bar_chart</mat-icon>
+      <span class="chart-title">Selected Date Ranges Summary</span>
+    </div>
+    <div class="chart-content">
+      <div class="chart-y-axis">
+        <div class="y-axis-label" *ngFor="let label of yAxisLabels">{{ label }}</div>
+      </div>
+      <div class="chart-bars">
+        <div class="chart-bar" *ngFor="let month of chartData" 
+             [style.height.px]="month.height"
+             [ngClass]="month.class">
+          <div class="bar-label">{{ month.label }}</div>
+        </div>
+      </div>
+      <div class="chart-x-axis">
+        <span class="x-axis-title">Timeline (2021)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="actions">
+    <button mat-raised-button 
+            class="validate-button" 
+            (click)="validateRanges()"
+            [disabled]="!canValidate()">
+      Validate Ranges
+    </button>
+    <button mat-raised-button 
+            color="primary" 
+            class="next-button"
+            [disabled]="!isValidated"
+            (click)="onNext()"
+            [ngClass]="{ 'enabled': isValidated }">
+      Next
+    </button>
+  </div>
+</div>

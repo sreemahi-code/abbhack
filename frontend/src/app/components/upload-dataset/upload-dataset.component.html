@@ -1,0 +1,96 @@
+<div class="upload-container">
+  <h2 class="page-title">Upload Dataset</h2>
+
+  <!-- Upload UI -->
+  <div *ngIf="!showSummary" class="upload-dropzone">
+    <div class="upload-content">
+      <mat-icon class="upload-icon">cloud_upload</mat-icon>
+      <p class="upload-text">Click to select a CSV file or drag and drop</p>
+      <input 
+        type="file" 
+        accept=".csv" 
+        (change)="onFileSelected($event)" 
+        hidden 
+        #fileInput
+      />
+      <button mat-raised-button color="primary" class="choose-file-btn" (click)="fileInput.click()">
+        Choose File
+      </button>
+    </div>
+  </div>
+
+  <!-- Summary UI -->
+  <div *ngIf="showSummary" class="summary-section">
+    <div class="summary-grid">
+      <!-- CSV File Card -->
+      <div class="summary-card file-card">
+        <div class="card-header">
+          <mat-icon class="card-icon file-icon">description</mat-icon>
+          <span class="card-label">CSV File</span>
+        </div>
+        <div class="card-content">
+          <div class="file-name">{{ fileName }}</div>
+          <div class="file-size">{{ fileSize }}</div>
+        </div>
+      </div>
+
+      <!-- Records Card -->
+      <div class="summary-card">
+        <div class="card-header">
+          <mat-icon class="card-icon records-icon">storage</mat-icon>
+          <span class="card-label">Records</span>
+        </div>
+        <div class="card-content">
+          <div class="card-value">{{ records | number }}</div>
+        </div>
+      </div>
+
+      <!-- Columns Card -->
+      <div class="summary-card">
+        <div class="card-header">
+          <mat-icon class="card-icon columns-icon">view_column</mat-icon>
+          <span class="card-label">Columns</span>
+        </div>
+        <div class="card-content">
+          <div class="card-value">{{ columns }}</div>
+        </div>
+      </div>
+
+      <!-- Pass Rate Card -->
+      <div class="summary-card">
+        <div class="card-header">
+          <mat-icon class="card-icon pass-rate-icon">check_circle</mat-icon>
+          <span class="card-label">Pass Rate</span>
+        </div>
+        <div class="card-content">
+          <div class="card-value pass-rate-value">{{ passRate }}</div>
+        </div>
+      </div>
+
+      <!-- Date Range Card -->
+      <div class="summary-card">
+        <div class="card-header">
+          <mat-icon class="card-icon date-icon">date_range</mat-icon>
+          <span class="card-label">Date Range</span>
+        </div>
+        <div class="card-content">
+          <div class="card-value date-start">{{ dateRange.split(' to ')[0] }}</div>
+          <div class="date-separator">to {{ dateRange.split(' to ')[1] }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Next Button -->
+    <div class="actions">
+      <button 
+        mat-raised-button 
+        color="primary" 
+        class="next-button"
+        [disabled]="!showSummary"
+        (click)="onNext()"
+        [ngClass]="{ 'enabled': showSummary }">
+        Next
+      </button>
+    </div>
+  </div>
+</div>

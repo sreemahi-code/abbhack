@@ -1,0 +1,219 @@
+/* Global App Styles */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5;
+}
+
+/* Header Styles */
+.app-header {
+  background: linear-gradient(135deg, #d4a5a5 0%, #b8a5d4 100%);
+  padding: 15px 30px;
+  color: white;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.title-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+  color: white;
+}
+
+.subtitle {
+  font-size: 14px;
+  font-weight: 400;
+  margin-top: 2px;
+  opacity: 0.9;
+}
+
+.abb-logo {
+  height: 45px;
+  width: auto;
+}
+
+/* Step Navigation Styles */
+.step-navigation {
+  background: white;
+  padding: 20px 30px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.step-container {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+
+.step-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: -25px;
+  width: 15px;
+  height: 2px;
+  background-color: #e0e0e0;
+}
+
+.step-item.completed:not(:last-child)::after {
+  background-color: #4caf50;
+}
+
+.step-circle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 14px;
+  background-color: #9e9e9e;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.step-item.active .step-circle {
+  background-color: #4caf50;
+}
+
+.step-item.completed .step-circle {
+  background-color: #4caf50;
+}
+
+.step-label {
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}
+
+.step-item.active .step-label {
+  color: #4caf50;
+  font-weight: 600;
+}
+
+.step-indicator {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  padding: 6px 16px;
+  border-radius: 20px;
+}
+
+.step-badge {
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Footer Styles */
+.app-footer {
+  position: relative;
+  height: 120px;
+  overflow: hidden;
+  margin-top: auto;
+}
+
+.footer-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #e53e3e 0%, #9f7aea 100%);
+}
+
+.footer-content {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-text {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+}
+
+.footer-branding {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.engineered-text {
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.outrun-text {
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header-content,
+  .step-navigation,
+  .footer-content {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  .step-container {
+    gap: 20px;
+  }
+  
+  .step-item:not(:last-child)::after {
+    right: -15px;
+    width: 10px;
+  }
+  
+  .main-title {
+    font-size: 20px;
+  }
+  
+  .step-label {
+    display: none;
+  }
+}

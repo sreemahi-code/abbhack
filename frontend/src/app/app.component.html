@@ -1,0 +1,52 @@
+<!-- Header Section -->
+<div class="app-header">
+  <div class="header-content">
+    <div class="title-section">
+      <h1 class="main-title">MiniML - Predictive Quality Control</h1>
+      <span class="subtitle">Simplified Frontend</span>
+    </div>
+    <img src="assets/logo.png" alt="ABB" class="abb-logo" />
+  </div>
+</div>
+
+<!-- Step Navigation -->
+<div class="step-navigation">
+  <div class="step-container">
+    <div class="step-item" [class.active]="currentStep === 1">
+      <div class="step-circle">1</div>
+      <span class="step-label">Upload Dataset</span>
+    </div>
+    <div class="step-item" [class.completed]="currentStep > 2">
+      <div class="step-circle">2</div>
+      <span class="step-label">Date Ranges</span>
+    </div>
+    <div class="step-item" [class.completed]="currentStep > 3">
+      <div class="step-circle">3</div>
+      <span class="step-label">Model Training</span>
+    </div>
+    <div class="step-item" [class.completed]="currentStep > 4">
+      <div class="step-circle">4</div>
+      <span class="step-label">Simulation</span>
+    </div>
+  </div>
+  <div class="step-indicator">
+    <span class="step-badge">Step {{ currentStep }} of 4</span>
+  </div>
+</div>
+
+<!-- Page Specific Content -->
+<div class="main-content">
+  <router-outlet></router-outlet>
+</div>
+
+<!-- Footer Section -->
+<div class="app-footer">
+  <div class="footer-gradient"></div>
+  <div class="footer-content">
+    <span class="footer-text">MiniML POC</span>
+    <div class="footer-branding">
+      <span class="engineered-text">ENGINEERED</span>
+      <span class="outrun-text">TO OUTRUN</span>
+    </div>
+  </div>
+</div>

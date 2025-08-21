@@ -1,0 +1,130 @@
+<div class="simulation-container">
+  <!-- Page Header -->
+  <div class="page-header">
+    <h2 class="page-title">Real-Time Prediction Simulation</h2>
+    <div class="step-indicator">Step 4 of 4</div>
+  </div>
+
+  <!-- Simulation Control Section -->
+  <div class="simulation-control">
+    <button 
+      *ngIf="!isSimulating && !isCompleted" 
+      class="start-btn" 
+      (click)="startSimulation()">
+      Start Simulation
+    </button>
+    
+    <button 
+      *ngIf="!isSimulating && isCompleted" 
+      class="restart-btn" 
+      (click)="restartSimulation()">
+      Restart Simulation
+    </button>
+
+    <div class="simulation-status" *ngIf="isSimulating">
+      <div class="status-message streaming">
+        <i class="streaming-icon"></i>
+        Click 'Start Simulation' to begin streaming predictions
+      </div>
+    </div>
+
+    <div class="simulation-status" *ngIf="isCompleted">
+      <div class="status-message completed">
+        <i class="check-icon">✓</i>
+        Simulation completed!
+      </div>
+    </div>
+  </div>
+
+  <!-- Charts Section -->
+  <div class="charts-section" *ngIf="isSimulating || isCompleted">
+    
+    <!-- Real-Time Quality Predictions Chart -->
+    <div class="chart-container">
+      <h3 class="section-title">Real-Time Quality Predictions</h3>
+      <div class="chart-wrapper">
+        <canvas id="qualityChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Statistics Row -->
+    <div class="stats-confidence-row">
+      
+      <!-- Prediction Confidence Chart -->
+      <div class="confidence-section">
+        <h3 class="section-title">Prediction Confidence</h3>
+        <div class="confidence-chart-wrapper">
+          <canvas id="confidenceChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Live Statistics -->
+      <div class="stats-section">
+        <h3 class="section-title">Live Statistics</h3>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-value">{{ stats.total }}</div>
+            <div class="stat-label">TOTAL</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">{{ stats.pass }}</div>
+            <div class="stat-label">PASS</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value fail">{{ stats.fail }}</div>
+            <div class="stat-label">FAIL</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">{{ stats.avgConfidence }}%</div>
+            <div class="stat-label">AVG CONF</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Prediction Stream Table -->
+    <div class="stream-section">
+      <h3 class="section-title">Live Prediction Stream</h3>
+      <div class="stream-table-container">
+        <table class="stream-table">
+          <thead>
+            <tr>
+              <th>TIME</th>
+              <th>SAMPLE ID</th>
+              <th>PREDICTION</th>
+              <th>CONFIDENCE</th>
+              <th>TEMPERATURE</th>
+              <th>PRESSURE</th>
+              <th>HUMIDITY</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of simulationData; let i = index" 
+                class="stream-row" 
+                [class.new-row]="i === 0">
+              <td>{{ data.time }}</td>
+              <td>{{ data.sampleId }}</td>
+              <td>
+                <span class="prediction-badge" 
+                      [class.pass]="data.prediction === 'Pass'"
+                      [class.fail]="data.prediction === 'Fail'">
+                  {{ data.prediction }}
+                </span>
+              </td>
+              <td>{{ data.confidence }}%</td>
+              <td>{{ data.temperature }}°C</td>
+              <td>{{ data.pressure }} hPa</td>
+              <td>{{ data.humidity }}%</td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <!-- Empty state when no data -->
+        <div class="empty-state" *ngIf="simulationData.length === 0">
+          <p>Waiting for simulation data...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

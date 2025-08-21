@@ -1,0 +1,99 @@
+<div class="model-training-container">
+  <!-- Page Header -->
+  <div class="page-header">
+    <h2 class="page-title">Model Training & Evaluation</h2>
+    <div class="step-indicator">Step 3 of 4</div>
+  </div>
+
+  <!-- Training Section (Before Training) -->
+  <div class="training-section" *ngIf="!isModelTrained && !isTraining">
+    <button class="train-btn" (click)="trainModel()" [disabled]="isTraining">
+      <span *ngIf="!isTraining">Train Model</span>
+      <span *ngIf="isTraining" class="loading-text">
+        <i class="spinner"></i>
+        Training...
+      </span>
+    </button>
+  </div>
+
+  <!-- Training Status -->
+  <div class="status-section" *ngIf="isTraining || isModelTrained">
+    <div class="status-message" [ngClass]="{
+      'training': isTraining,
+      'success': isModelTrained && !isTraining,
+      'error': trainingStatus.includes('failed')
+    }">
+      <i class="status-icon" [ngClass]="{
+        'spinner': isTraining,
+        'check': isModelTrained && !isTraining && !trainingStatus.includes('failed'),
+        'error-icon': trainingStatus.includes('failed')
+      }"></i>
+      {{ trainingStatus }}
+    </div>
+  </div>
+
+  <!-- Results Section (After Training) -->
+  <div class="results-section" *ngIf="isModelTrained && metrics">
+    
+    <!-- Model Performance Metrics -->
+    <div class="metrics-section">
+      <h3 class="section-title">Model Performance Metrics</h3>
+      <div class="metrics-grid">
+        <div class="metric-card accuracy">
+          <div class="metric-value">{{ metrics ? (metrics.accuracy * 100).toFixed(1) : '0.0' }}%</div>
+          <div class="metric-label">Accuracy</div>
+        </div>
+        <div class="metric-card precision">
+          <div class="metric-value">{{ metrics ? (metrics.precision * 100).toFixed(1) : '0.0' }}%</div>
+          <div class="metric-label">Precision</div>
+        </div>
+        <div class="metric-card recall">
+          <div class="metric-value">{{ metrics ? (metrics.recall * 100).toFixed(1) : '0.0' }}%</div>
+          <div class="metric-label">Recall</div>
+        </div>
+        <div class="metric-card f1-score">
+          <div class="metric-value">{{ metrics ? (metrics.f1Score * 100).toFixed(1) : '0.0' }}%</div>
+          <div class="metric-label">F1-Score</div>
+        </div>
+      </div>
+      
+      <!-- Training Summary -->
+      <div class="training-summary">
+        Model trained on 8 months of data • Validated on 2 months • Ready for 2-month simulation
+      </div>
+    </div>
+
+    <!-- Model Performance Charts -->
+    <div class="charts-section">
+      <h3 class="section-title">Model Performance</h3>
+      
+      <!-- Training Metrics Chart -->
+      <div class="chart-container">
+        <h4 class="chart-title">Training Metrics</h4>
+        <div class="chart-wrapper">
+          <canvas id="trainingChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Confusion Matrix Chart -->
+      <div class="chart-container">
+        <h4 class="chart-title">Model Performance</h4>
+        <div class="chart-wrapper confusion-wrapper">
+          <canvas id="confusionChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Navigation -->
+  <div class="navigation-section">
+    <button 
+      class="next-btn" 
+      [disabled]="!isModelTrained" 
+      (click)="proceedToNext()"
+      [ngClass]="{ 'enabled': isModelTrained }">
+      Next
+    </button>
+  </div>
+</div>
