@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   // Track the current step (default Step 1)
   currentStep: number = 1;
 
-  constructor(private router: Router) {} // ✅ Inject Router here
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     // Update current step based on route
